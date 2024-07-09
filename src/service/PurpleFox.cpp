@@ -15,42 +15,42 @@ bool PurpleFox::registerUser(const string& username, const string& password) {
     return userRegistration.registerUser(username, password);
 }
 
-void PurpleFox::selectOccasionType(const OccasionType event) {
-    selectedOccasionType = event;
+void PurpleFox::selectOccasionType(const OccasionType occasion) {
+    occasionType = occasion;
 }
 
 OccasionType PurpleFox::getSelectedEvent() const {
-    return selectedOccasionType;
+    return occasionType;
 }
 
 std::set<City> PurpleFox::supportedCities() {
     return { City::HYDERABAD, City::COIMBATORE, City::BANGALORE };
 }
 
-void PurpleFox::selectCityForVenue(const City city) {
-    selectedCity = city;
+void PurpleFox::selectCityForVenue(const City selectedCity) {
+    city = selectedCity;
 }
 
 City PurpleFox::getSelectedCity() const {
-    return selectedCity;
+    return city;
 }
 
 void PurpleFox::selectService(const EventService service) {
-    selectedServices.insert(service);
+    eventServices.insert(service);
 }
 
 bool PurpleFox::isServiceSelected(EventService service) const {
-    return selectedServices.find(service) != selectedServices.end();
+    return eventServices.find(service) != eventServices.end();
 }
 
 std::unordered_set<EventService> PurpleFox::getSelectedServices() const {
-    return selectedServices;
+    return eventServices;
 }
 
-void PurpleFox::selectBudget(Budget budget) {
-    selectedBudget = budget;
+void PurpleFox::selectBudget(const Budget selectedBudget) {
+    budget = selectedBudget;
 }
 
 Budget PurpleFox::getSelectedBudget() const {
-    return selectedBudget;
+    return budget;
 }

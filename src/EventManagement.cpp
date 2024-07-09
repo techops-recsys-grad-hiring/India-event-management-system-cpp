@@ -10,10 +10,62 @@
 
 using namespace std;
 
+void enterEventDetails(PurpleFox &purpleFox) {
+    string cityChoice, occasionChoice, serviceChoice, budgetChoice;
+    cout << "Select a city for your event from the following options:" << endl;
+    for (City city: getAllCities()) {
+        cout << "- " << city << endl;
+    }
+    cout << "Enter your choice: ";
+    getline(cin, cityChoice);
+    const City selectedCity = toCity(cityChoice);
+    purpleFox.selectCityForVenue(selectedCity);
+
+    cout << "Select the type of event from the following options:" << endl;
+    for (OccasionType occasion: getAllOccasionTypes()) {
+        cout << "- " << occasion << endl;
+    }
+    cout << "Enter your choice: ";
+    getline(cin, occasionChoice);
+    const OccasionType selectedOccasion = toOccasionType(occasionChoice);
+    purpleFox.selectOccasionType(selectedOccasion);
+
+    cout << "Select services for your event from the following options:" << endl;
+    for (EventService service: getAllEventServices()) {
+        cout << "- " << service << endl;
+    }
+    cout << "Enter your choice: ";
+    getline(cin, serviceChoice);
+    const EventService selectedService = toEventService(serviceChoice);
+    purpleFox.selectService(selectedService);
+
+    cout << "Select a budget preference from the following options:" << endl;
+    for (Budget budget: getAllBudgets()) {
+        cout << "- " << budget << endl;
+    }
+    cout << "Enter your choice: ";
+    getline(cin, budgetChoice);
+    const Budget selectedBudget = toBudget(budgetChoice);
+    purpleFox.selectBudget(selectedBudget);
+}
+
+void printEventSummary(const PurpleFox& purpleFox) {
+    cout << "\nEvent Summary:" << endl;
+    cout << "City: " << purpleFox.getSelectedCity() << endl;
+    cout << "Occasion: " << purpleFox.getSelectedEvent() << endl;
+    cout << "Services: ";
+    for (const auto &service: purpleFox.getSelectedServices()) {
+        cout << service << " ";
+    }
+    cout << endl;
+    cout << "Budget: " << purpleFox.getSelectedBudget() << endl;
+    cout << "Thank you for using PurpleFox!" << endl;
+}
+
 int main() {
     string username, password, cityChoice, occasionChoice, serviceChoice, budgetChoice;
-    PurpleFox purpleFox;
     UserRegistration userRegistration;
+    PurpleFox purpleFox;
 
     cout << "Welcome to PurpleFox Event Management!" << endl;
     cout << "Enter username to register: ";
@@ -28,52 +80,8 @@ int main() {
         return 1;
     }
 
-    cout << "Select a city for your event from the following options:" << endl;
-    for (City city : getAllCities()) {
-        cout << "- " << city << endl;
-    }
-    cout << "Enter your choice: ";
-    getline(cin, cityChoice);
-    City selectedCity = stringToCity(cityChoice);
-    purpleFox.selectCityForVenue(selectedCity);
-
-    cout << "Select the type of event from the following options:" << endl;
-    for (OccasionType occasion : getAllOccasionTypes()) {
-        cout << "- " << occasion << endl;
-    }
-    cout << "Enter your choice: ";
-    getline(cin, occasionChoice);
-    OccasionType selectedOccasion = stringToOccasionType(occasionChoice);
-    purpleFox.selectOccasionType(selectedOccasion);
-
-    cout << "Select services for your event from the following options:" << endl;
-    for (EventService service : getAllEventServices()) {
-        cout << "- " << service << endl;
-    }
-    cout << "Enter your choice: ";
-    getline(cin, serviceChoice);
-    EventService selectedService = stringToEventService(serviceChoice);
-    purpleFox.selectService(selectedService);
-
-    cout << "Select a budget preference from the following options:" << endl;
-    for (Budget budget : getAllBudgets()) {
-        cout << "- " << budget << endl;
-    }
-    cout << "Enter your choice: ";
-    getline(cin, budgetChoice);
-    Budget selectedBudget = stringToBudget(budgetChoice);
-    purpleFox.selectBudget(selectedBudget);
-
-    cout << "\nEvent Summary:" << endl;
-    cout << "City: " << purpleFox.getSelectedCity() << endl;
-    cout << "Occasion: " << purpleFox.getSelectedEvent() << endl;
-    cout << "Services: ";
-    for (const auto& service : purpleFox.getSelectedServices()) {
-        cout << service << " ";
-    }
-    cout << endl;
-    cout << "Budget: " << purpleFox.getSelectedBudget() << endl;
-    cout << "Thank you for using PurpleFox!" << endl;
+    enterEventDetails(purpleFox);
+    printEventSummary(purpleFox);
 
     return 0;
 }

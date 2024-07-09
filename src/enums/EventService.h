@@ -3,13 +3,16 @@
 
 #include <iostream>
 
+using namespace std;
+
 enum class EventService {
     PHOTOGRAPHY,
     DECORATION,
     VENUE_SELECTION,
     FOOD_CATERING
 };
-inline std::ostream& operator<<(std::ostream& os, const EventService& eventService) {
+
+inline ostream& operator<<(ostream& os, const EventService& eventService) {
     switch (eventService) {
         case EventService::PHOTOGRAPHY: os << "PHOTOGRAPHY"; break;
         case EventService::DECORATION: os << "DECORATION"; break;
@@ -19,17 +22,17 @@ inline std::ostream& operator<<(std::ostream& os, const EventService& eventServi
     return os;
 }
 
-inline EventService stringToEventService(const std::string& str) {
+inline EventService toEventService(const string& str) {
     string eventService = str;
-    transform(eventService.begin(), eventService.end(), eventService.begin(), [](unsigned char c) { return std::toupper(c); });
+    transform(eventService.begin(), eventService.end(), eventService.begin(), [](unsigned char c) { return toupper(c); });
     if (eventService == "PHOTOGRAPHY") return EventService::PHOTOGRAPHY;
     if (eventService == "DECORATION") return EventService::DECORATION;
     if (eventService == "VENUE_SELECTION") return EventService::VENUE_SELECTION;
     if (eventService == "FOOD_CATERING") return EventService::FOOD_CATERING;
-    throw std::invalid_argument("Invalid event service string");
+    throw invalid_argument("Invalid event service string");
 }
 
-inline std::vector<EventService> getAllEventServices() {
+inline vector<EventService> getAllEventServices() {
     return { EventService::PHOTOGRAPHY, EventService::DECORATION, EventService::FOOD_CATERING, EventService::VENUE_SELECTION };
 }
 

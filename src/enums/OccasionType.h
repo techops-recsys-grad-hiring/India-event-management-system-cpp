@@ -3,12 +3,14 @@
 
 #include <iostream>
 
+using namespace std;
+
 enum class OccasionType {
     WEDDING,
     BIRTHDAY
 };
 
-inline std::ostream& operator<<(std::ostream& os, const OccasionType& occasionType) {
+inline ostream& operator<<(ostream& os, const OccasionType& occasionType) {
     switch (occasionType) {
         case OccasionType::WEDDING: os << "WEDDING"; break;
         case OccasionType::BIRTHDAY: os << "BIRTHDAY"; break;
@@ -16,15 +18,15 @@ inline std::ostream& operator<<(std::ostream& os, const OccasionType& occasionTy
     return os;
 }
 
-inline OccasionType stringToOccasionType(const std::string& str) {
+inline OccasionType toOccasionType(const string& str) {
     string occasion = str;
-    transform(occasion.begin(), occasion.end(), occasion.begin(), [](unsigned char c) { return std::toupper(c); });
+    transform(occasion.begin(), occasion.end(), occasion.begin(), [](unsigned char c) { return toupper(c); });
     if (occasion == "BIRTHDAY") return OccasionType::BIRTHDAY;
     if (occasion == "WEDDING") return OccasionType::WEDDING;
-    throw std::invalid_argument("Invalid occasion string");
+    throw invalid_argument("Invalid occasion string");
 }
 
-inline std::vector<OccasionType> getAllOccasionTypes() {
+inline vector<OccasionType> getAllOccasionTypes() {
     return { OccasionType::WEDDING, OccasionType::BIRTHDAY };
 }
 

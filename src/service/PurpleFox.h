@@ -9,32 +9,34 @@
 #include "../enums/EventService.h"
 #include "../enums/Budget.h"
 
+using namespace std;
+
 class PurpleFox {
 private:
     UserRegistration userRegistration;
-    OccasionType selectedOccasionType;
-    std::unordered_set<EventService> selectedServices;
-    Budget selectedBudget;
-    City selectedCity;
+    OccasionType occasionType;
+    unordered_set<EventService> eventServices;
+    Budget budget;
+    City city;
 
 public:
     PurpleFox();
 
-    bool registerUser(const std::string& username, const std::string& password);
+    bool registerUser(const string& username, const string& password);
 
-    void selectOccasionType(OccasionType event);
+    void selectOccasionType(OccasionType occasion);
     OccasionType getSelectedEvent() const;
 
-    static std::set<City> supportedCities() ;
+    static set<City> supportedCities() ;
 
-    void selectCityForVenue(City city);
+    void selectCityForVenue(City selectedCity);
     City getSelectedCity() const;
 
     void selectService(EventService service);
     bool isServiceSelected(EventService service) const;
-    std::unordered_set<EventService> getSelectedServices() const;
+    unordered_set<EventService> getSelectedServices() const;
 
-    void selectBudget(Budget budget);
+    void selectBudget(Budget selectedBudget);
     Budget getSelectedBudget() const;
 };
 

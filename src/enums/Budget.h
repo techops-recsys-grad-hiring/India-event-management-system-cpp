@@ -10,7 +10,7 @@ enum class Budget {
     PREMIUM
 };
 
-inline std::ostream& operator<<(std::ostream& os, const Budget& budget) {
+inline ostream& operator<<(ostream& os, const Budget& budget) {
     switch (budget) {
         case Budget::BUDGET_FRIENDLY: os << "BUDGET_FRIENDLY"; break;
         case Budget::STANDARD: os << "STANDARD"; break;
@@ -19,16 +19,16 @@ inline std::ostream& operator<<(std::ostream& os, const Budget& budget) {
     return os;
 }
 
-inline Budget stringToBudget(const std::string& str) {
+inline Budget toBudget(const string& str) {
     string budget = str;
-    transform(budget.begin(), budget.end(), budget.begin(), [](unsigned char c) { return std::toupper(c); });
+    transform(budget.begin(), budget.end(), budget.begin(), [](unsigned char c) { return toupper(c); });
     if (budget == "BUDGET_FRIENDLY") return Budget::BUDGET_FRIENDLY;
     if (budget == "STANDARD") return Budget::STANDARD;
     if (budget == "PREMIUM") return Budget::PREMIUM;
-    throw std::invalid_argument("Invalid budget string");
+    throw invalid_argument("Invalid budget string");
 }
 
-inline std::vector<Budget> getAllBudgets() {
+inline vector<Budget> getAllBudgets() {
     return { Budget::BUDGET_FRIENDLY, Budget::STANDARD, Budget::PREMIUM };
 }
 
